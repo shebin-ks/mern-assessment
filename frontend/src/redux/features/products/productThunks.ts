@@ -9,7 +9,7 @@ export const fetchProducts = createAsyncThunk<
     void,
     { rejectValue: string }
 >(
-    "cars/fetch",
+    "products/fetch",
     async (_, thunkApi) => {
         try {
 

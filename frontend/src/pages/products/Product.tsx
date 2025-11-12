@@ -1,8 +1,9 @@
 import { useEffect } from "react"
 import { useAppDispatch, useAppSelector } from "../../hooks/reduxHooks"
 import { fetchProducts } from "../../redux/features/products/productThunks"
-import { Loader2 } from "lucide-react"
+import { Loader2, Plus } from "lucide-react"
 import ProductTable from "./components/ProductTable"
+import { useNavigate } from "react-router-dom"
 
 type Props = {}
 
@@ -10,6 +11,7 @@ const Product = ({ }: Props) => {
 
     const { products, loading, success } = useAppSelector(state => state.products)
 
+    const navigate = useNavigate()
     const dispatch = useAppDispatch()
     useEffect(() => {
         if (!loading && success == null) {
@@ -19,7 +21,7 @@ const Product = ({ }: Props) => {
     }, [loading, success])
 
     return (
-        <div className="flex px-6 py-12">
+        <div className="flex flex-col px-6 py-12">
             {
                 (loading) &&
                 (
@@ -29,6 +31,11 @@ const Product = ({ }: Props) => {
                 )
 
             }
+            <div className="flex justify-between mb-8 px-12">
+                <h1 className="text-xl font-bold">Products</h1>
+                <Plus className="cursor-pointer" onClick={()=>navigate("/add-product")}/>
+
+            </div>
             <div className="flex items-center justify-center w-screen">
                 {products ?
                     (

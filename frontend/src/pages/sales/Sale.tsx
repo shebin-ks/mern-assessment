@@ -13,12 +13,20 @@ export interface Item {
     product: Product,
     quantity: number
 }
+
+interface sale {
+    discount: string;
+    salePrice: string;
+    salesItems: Item
+}
 type Props = {}
 
 const Sale = ({ }: Props) => {
     const { products, loading, success, searchResult } = useAppSelector(state => state.products)
 
     const [searchTerm, setSearchTerm] = useState("")
+
+    const [bill, setBill] = useState<sale | null>();
 
     const dispatch = useAppDispatch()
     useEffect(() => {
@@ -30,18 +38,31 @@ const Sale = ({ }: Props) => {
     }, [loading, success])
 
     useEffect(() => {
-        if (searchTerm.length > 0) {
+        if (searchTerm.length >= 0) {
             dispatch(searchProduct(searchTerm))
         }
 
 
     }, [searchTerm])
 
+    useEffect(() => {
+        if (bill) {
+            dispatch(fetchProducts())
+        }
+
+
+    }, [bill])
+
 
     const [items, setItems] = useState<Item[]>([])
 
 
     const addItem = (newItem: Item) => {
+
+        if (newItem.product.currentStock === 0) {
+            alert("Out of stock")
+            return
+        }
         let isUpdated = false;
         items.map((item) => {
             if (item.product.productId === newItem.product.productId) {
@@ -68,9 +89,14 @@ const Sale = ({ }: Props) => {
         }
         setItems(prevItems => prevItems.map((item) => {
             if (item.product.productId === productId) {
-                return {
-                    ...item,
-                    quantity: newQuantity
+                if (item.product.currentStock < newQuantity) {
+                    alert("Not enough stocks")
+
+                } else {
+                    return {
+                        ...item,
+                        quantity: newQuantity
+                    }
                 }
             }
             return item
@@ -78,6 +104,7 @@ const Sale = ({ }: Props) => {
 
         ));
     };
+
 
     const createBill = async () => {
         if (items.length < 1) {
@@ -96,13 +123,18 @@ const Sale = ({ }: Props) => {
 
         try {
             const result = await SalesApi.createSale({ products: payload })
-            console.log(result);
+
+            setBill(result.sale)
+
         } catch (error: any) {
             alert(error.message)
         }
 
+    }
 
-
+    const clearData = () => {
+        setItems([])
+        setBill(null)
     }
 
     return (
@@ -119,9 +151,28 @@ const Sale = ({ }: Props) => {
                         <div
                             onClick={createBill}
                             className="inline-flex my-8 cursor-pointer bg-gray-800 text-white px-4 py-2 rounded-lg shadow-md">
-                            Create Bill
+                            Generate Bill
                         </div>
                     )}
+
+                {(bill) &&
+                    (
+
+                        <div className="flex flex-col w-full ">
+                            <div className="w-3/5 rounded-xl border border-gray-600 px-4 py-3">
+                                <div className="flex flex-col">
+                                    <h2>Discount: {bill.discount} %</h2>
+                                    <h2>Amount to pay: ${bill.salePrice}</h2>
+                                </div>
+                                <div
+                                    onClick={clearData}
+                                    className="inline-flex  my-8 cursor-pointer bg-gray-800 text-white px-4 py-2 rounded-lg shadow-md">
+                                    Print receipt
+                                </div>
+                            </div>
+                        </div>
+                    )}
+
 
 
             </div>

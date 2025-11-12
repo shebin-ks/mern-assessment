@@ -4,6 +4,7 @@ import Product from "../pages/products/Product";
 import Sale from "../pages/sales/Sale";
 import Stock from "../pages/stock/Stock";
 import Home from "../pages/home/Home";
+import CreateProducts from "../pages/products/components/CreateProducts";
 
 type Props = {}
 
@@ -23,6 +24,10 @@ const AppRoutes = (_: Props) => {
                 <Route
                     path="/products"
                     element={<Product />}
+                />
+                <Route
+                    path="/add-product"
+                    element={<CreateProducts />}
                 />
                 <Route
                     path="/sales"

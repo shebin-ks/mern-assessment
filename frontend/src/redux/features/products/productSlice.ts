@@ -48,6 +48,7 @@ const productsSlice = createSlice({
                 state.message = action.payload.message;
 
                 state.products = action.payload.products
+                state.searchResult = null;
             })
             .addCase(fetchProducts.rejected, (state, action) => {
                 state.loading = false;

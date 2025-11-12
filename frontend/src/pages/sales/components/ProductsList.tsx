@@ -27,7 +27,7 @@ const ProductsList = ({ products, searchTerm, setSearchTerm, addItem }: Props) =
                         className="flex bg-blue-200 rounded-md my-1 px-4 py-2 justify-between">
                         <div>
 
-                            <h1>{product.productName} - {product.price}</h1>
+                            <h1>{product.productName} - {product.currentStock} (${product.price})</h1>
                         </div>
                         <Plus
                             className='text-white w-6 h-6 hover:text-black cursor-pointer'

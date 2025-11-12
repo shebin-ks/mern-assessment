@@ -20,9 +20,7 @@ export class ProductApi {
         }
     };
 
-    static createProduct = async (payload: Product): Promise<BaseResponse> => {
-
-
+    static createProduct = async (payload: Partial<Product>): Promise<BaseResponse> => {
 
         try {
 
