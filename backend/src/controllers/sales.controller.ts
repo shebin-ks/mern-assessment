@@ -4,6 +4,10 @@ import { ApiError } from "../util/common/apiError";
 import { SaleItemService } from "../services/saleItem.service";
 import { SaleService } from "../services/sale.services";
 
+interface ProductStockUpdates {
+    [productId: string]: number;
+}
+
 export class SalesController {
 
     static createSales = async (req: Request, res: Response, next: NextFunction) => {
@@ -12,7 +16,7 @@ export class SalesController {
             const { customerNumber, products } = req.body;
 
 
-            const keyValue = products.reduce((acc, product) => {
+            const keyValue: ProductStockUpdates = products.reduce((acc, product) => {
                 acc[product.productId] = product.quantity;
                 return acc;
             }, {});
@@ -26,11 +30,13 @@ export class SalesController {
                 customerNumber,
             })
 
+            const currentStock: ProductStockUpdates = {};
 
             const result = productsInfo.map((product) => {
                 if (product.currentStock < keyValue[product.productId]) {
                     throw new ApiError(`Only ${product.currentStock} stock is available for product ${product.productName}`)
                 }
+                currentStock[product.productId] = product.currentStock;
 
                 const quantity = keyValue[product.productId]
 
@@ -56,6 +62,11 @@ export class SalesController {
 
             const afterDiscountPrice = totalPrice - (totalPrice * discount) / 100
 
+            for (const [key, value] of Object.entries(keyValue)) {
+                await ProductService.updateProduct(key, {
+                    currentStock: currentStock[key] - value
+                })
+            }
 
             await SaleService.updateSale(sale.saleId, {
                 salePrice: afterDiscountPrice,
@@ -77,6 +88,8 @@ export class SalesController {
             });
 
         } catch (error) {
+            console.log(error);
+
             next(error);
         }
     }

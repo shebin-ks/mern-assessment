@@ -11,6 +11,13 @@ export const createProductSchema = Joi.object({
             "string.min": "Product name must be atleast 3 characters"
 
         }),
+    price: Joi.number()
+        .optional()
+        .min(0)
+        .messages({
+            "number.base": "price must be a number",
+            "number.min": "Price cannot be negative"
+        }),
     currentStock: Joi.number()
         .optional()
         .min(0)

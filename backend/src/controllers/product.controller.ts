@@ -6,14 +6,16 @@ export class ProductController {
 
     static createProduct = async (req: Request, res: Response, next: NextFunction) => {
         try {
-            
-            const { productName, currentStock, taxPercentage } = req.body;
-            let sku = productName.slice(0,3).toUpperCase() + Math.ceil(Math.random() *10000)
 
-            
+            const { productName, price, currentStock, taxPercentage } = req.body;
+            let sku = productName.slice(0, 3).toUpperCase() + Math.ceil(Math.random() * 10000)
+console.log(price);
+
+
             const product = await ProductService.createProduct({
                 productName,
                 sku,
+                price,
                 currentStock,
                 taxPercentage
             });
@@ -31,7 +33,7 @@ export class ProductController {
     static getAllProducts = async (_req: Request, res: Response, next: NextFunction) => {
         try {
             const products = await ProductService.getAllProducts();
-            
+
             res.status(200).json({
                 success: true,
                 message: "Products fetched successfully",

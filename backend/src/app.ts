@@ -8,17 +8,18 @@ const app = express()
 
 
 app.use(express.json())
-app.use(express.urlencoded({extended:true}))
+app.use(express.urlencoded({ extended: true }))
 
 
 app.use(cors({
-
+    origin: "http://localhost:5173",
+    credentials: true
 }))
 
 
 
-app.use("/api/v1/product",productRouter)
-app.use("/api/v1/sale",saleRouter)
+app.use("/api/v1/product", productRouter)
+app.use("/api/v1/sale", saleRouter)
 
 
 app.use(errorHandler)
