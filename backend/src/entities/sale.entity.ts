@@ -8,24 +8,21 @@ export class Sale {
     @PrimaryGeneratedColumn('uuid', { name: 'sale_id' })
     saleId: string
 
+
+    @Column({ name: 'customer_number', nullable: true })
+    customerNumber: number
+
+
     @ManyToMany(() => SaleItem, { onDelete: "CASCADE", nullable: false })
-    @JoinColumn({ name: 'sale_item_it' })
+    @JoinColumn({ name: 'sale_item_id' })
     saleItem: SaleItem
 
 
-    @Column('numeric', { name: 'sale_price', precision: 3 })
+    @Column({ type: 'decimal', name: 'sale_price', default: 0 })
     salePrice: number
 
-    @Column('numeric', { nullable: true, precision: 3 })
+    @Column({ type: 'decimal', nullable: true, default: 0 })
     discount: number
-
-
-    @Column('numeric', { precision: 3 })
-    price: number
-
-
-    @Column('numeric', { precision: 3, name: 'tax_percentage' })
-    taxPercentage: number
 
 
     @CreateDateColumn({ name: 'created_at' })
