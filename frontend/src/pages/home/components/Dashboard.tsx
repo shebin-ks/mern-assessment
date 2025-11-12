@@ -1,4 +1,4 @@
-import { Currency, ShoppingCartIcon } from "lucide-react"
+import {  ShoppingCartIcon } from "lucide-react"
 import DashboardCard from "../../../components/cards/DashboardCard"
 
 type Props = {}
