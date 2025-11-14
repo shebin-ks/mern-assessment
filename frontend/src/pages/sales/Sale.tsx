@@ -123,6 +123,7 @@ const Sale = ({ }: Props) => {
 
         try {
             const result = await SalesApi.createSale({ products: payload })
+console.log(result);
 
             setBill(result.sale)
 

@@ -8,7 +8,9 @@ const CreateProducts = () => {
     const [price, setPrice] = useState(0)
     const [currentStock, setCurrentStock] = useState(0)
 
-    const handleSubmit = async () => {
+    const handleSubmit = async (e: any) => {
+        e.preventDefault()
+
         if (productName.length < 0) {
             alert("Enter product name")
 

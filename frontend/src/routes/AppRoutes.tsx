@@ -2,9 +2,10 @@ import { Navigate, Route, Routes } from "react-router-dom";
 import BaseLayout from "../layouts/BaseLayout";
 import Product from "../pages/products/Product";
 import Sale from "../pages/sales/Sale";
-import Stock from "../pages/stock/Stock";
 import Home from "../pages/home/Home";
 import CreateProducts from "../pages/products/components/CreateProducts";
+import Purchase from "../pages/purchase/Purchase";
+import CreatePurchase from "../pages/purchase/components/CreatePurchase";
 
 type Props = {}
 
@@ -34,8 +35,12 @@ const AppRoutes = (_: Props) => {
                     element={<Sale />}
                 />
                 <Route
-                    path="/stocks"
-                    element={<Stock />}
+                    path="/purchase"
+                    element={<Purchase />}
+                />
+                <Route
+                    path="/add-purchase"
+                    element={<CreatePurchase />}
                 />
 
 

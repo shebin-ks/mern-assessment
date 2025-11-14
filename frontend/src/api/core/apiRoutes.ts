@@ -9,6 +9,10 @@ export const API_ROUTES = {
         ADD_PRODUCT: `/product`,
         GET_ALL_PRODUCTS: '/product',
     },
+    PURCHASE: {
+        ADD_PURCHASE: `/purchase`,
+        GET_ALL_PURCHASE: '/purchase',
+    },
     SALE: {
         CREATE_SALE: `/sale`,
     },

@@ -43,8 +43,8 @@ const Navbar = ({ }: Props) => {
                     <NavLink to="/sales" className={linkClasses}>
                         Sales
                     </NavLink>
-                    <NavLink to="/stock" className={linkClasses}>
-                        Stocks
+                    <NavLink to="/purchase" className={linkClasses}>
+                        Purchase
                     </NavLink>
 
                 </div>
