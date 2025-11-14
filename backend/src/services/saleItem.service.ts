@@ -27,6 +27,7 @@ export class SaleItemService {
         return await this.saleItemRepo.find({
             where: {
                 sale: { saleId }
+
             }
         });
     }

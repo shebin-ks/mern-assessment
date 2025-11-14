@@ -1,4 +1,4 @@
-import { In } from "typeorm";
+import { Between, In } from "typeorm";
 import { AppDataSource } from "../config/data-source";
 import { Product } from "../entities/product.entity";
 import { SaleItem } from "../entities/saleItem.entity";
@@ -19,6 +19,14 @@ export class SaleService {
 
     static getSaleById = async (saleId: string) => {
         return await this.saleRepo.findOneBy({ saleId });
+    }
+
+    static getSalesByDate = async (startingdate: Date, endingDate:Date) => {
+        return await this.saleRepo.findAndCount({
+            where: {
+                createdAt: Between(startingdate, endingDate)
+            }
+        })
     }
 
 }

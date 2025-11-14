@@ -1,4 +1,4 @@
-import { In } from "typeorm";
+import { In, LessThan, LessThanOrEqual } from "typeorm";
 import { AppDataSource } from "../config/data-source";
 import { Product } from "../entities/product.entity";
 
@@ -10,14 +10,21 @@ export class ProductService {
         return await this.productRepo.save(newProduct);
     }
 
-    static getAllProducts = async (productIds?: string[]) => {
-        let where: any;
+    static getAllProducts = async (productIds?: string[], lowStockCount?: number) => {
+        let where: any = {};
 
+        
         if (productIds && productIds.length > 0) {
             where = {
                 productId: In(productIds)
             }
         }
+
+        if (lowStockCount) {
+            where.currentStock = LessThan(lowStockCount)
+
+        }
+        
 
         return await this.productRepo.find({
             where,

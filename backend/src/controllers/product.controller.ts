@@ -9,7 +9,7 @@ export class ProductController {
 
             const { productName, price, currentStock, taxPercentage } = req.body;
             let sku = productName.slice(0, 3).toUpperCase() + Math.ceil(Math.random() * 10000)
-console.log(price);
+            console.log(price);
 
 
             const product = await ProductService.createProduct({
@@ -95,6 +95,27 @@ console.log(price);
             res.status(200).json({
                 success: true,
                 message: "Product deleted successfully"
+            });
+        } catch (error) {
+            next(error);
+        }
+    }
+
+    static getLowStockItem = async (req: Request, res: Response, next: NextFunction) => {
+        try {
+
+            const { lowStockQuantity } = req.params;
+
+            const count = Number(lowStockQuantity)
+
+            console.log(count);
+            
+            const products = await ProductService.getAllProducts(null,count);
+
+            res.status(200).json({
+                success: true,
+                message: "Low stocked products fetched successfully",
+                products
             });
         } catch (error) {
             next(error);

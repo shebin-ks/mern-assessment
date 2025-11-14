@@ -10,6 +10,10 @@ productRouter.route('/')
     .post(validateBody(createProductSchema), ProductController.createProduct)
     .get(ProductController.getAllProducts);
 
+productRouter.route('/low-stock/:lowStockQuantity')
+    .get(ProductController.getLowStockItem);
+
+
 productRouter.route('/:productId')
     .get(ProductController.getProductById)
     .patch(ProductController.updateProduct)
