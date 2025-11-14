@@ -21,7 +21,7 @@ const SaleTable = ({ sales }: Props) => {
                         Sale Price
                     </th>
                     <th scope="col" className="px-6 py-3">
-                        Discount
+                        Discount %
                     </th>
                     <th scope="col" className="px-6 py-3">
                         Action

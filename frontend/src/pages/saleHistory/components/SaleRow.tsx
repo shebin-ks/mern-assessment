@@ -34,7 +34,7 @@ const TableRow = ({ sale }: Props) => {
                 {sale.salePrice}
             </td>
             <td className="px-6 py-4">
-                ${sale.discount}
+                {sale.discount} %
             </td>
             <td className="px-6 py-4">
                 <div className="cursor-pointer" onClick={() => {
