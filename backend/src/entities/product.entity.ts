@@ -13,7 +13,7 @@ export class Product {
     @Column({ unique: true })
     sku: string
 
-    @Column({ name: 'current_stock', default: 0})
+    @Column({ name: 'current_stock', default: 0 })
     currentStock: number
 
 
@@ -23,6 +23,9 @@ export class Product {
 
     @Column({ type: 'decimal', default: 100, name: 'tax_percentage' })
     taxPercentage: number
+
+    @Column({ name: 'is_delete', default: false })
+    isDelete: boolean
 
 
     @CreateDateColumn({ name: 'created_at' })

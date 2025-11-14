@@ -46,8 +46,8 @@ export class ProductController {
 
     static getProductById = async (req: Request, res: Response, next: NextFunction) => {
         try {
-            const { ProductId } = req.params;
-            const Product = await ProductService.getProductById(ProductId);
+            const { productId } = req.params;
+            const Product = await ProductService.getProductById(productId);
 
             if (!Product) throw new ApiError("Product not found", 404);
 
@@ -65,18 +65,27 @@ export class ProductController {
 
     static updateProduct = async (req: Request, res: Response, next: NextFunction) => {
         try {
-            const { ProductId } = req.params;
+
+
+            const { productId } = req.params;
+
+
             const updates = req.body;
 
-            const Product = await ProductService.getProductById(ProductId);
-            if (!Product) throw new ApiError("Product not found", 404);
 
-            const updatedProduct = await ProductService.updateProduct(ProductId, updates);
+            let product = await ProductService.getProductById(productId);
+            if (!product) throw new ApiError("Product not found", 404);
+
+            const updatedProduct = await ProductService.updateProduct(productId, updates);
+
+
+            product = await ProductService.getProductById(productId);
+            console.log(product);
 
             res.status(200).json({
                 success: true,
                 message: "Product updated successfully",
-                Product: updatedProduct
+                product
             });
         } catch (error) {
             next(error);
@@ -85,12 +94,15 @@ export class ProductController {
 
     static deleteProduct = async (req: Request, res: Response, next: NextFunction) => {
         try {
-            const { ProductId } = req.params;
+            const { productId } = req.params;
 
-            const Product = await ProductService.getProductById(ProductId);
-            if (!Product) throw new ApiError("Product not found", 404);
+            const product = await ProductService.getProductById(productId);
+            if (!product) throw new ApiError("Product not found", 404);
 
-            await ProductService.deleteProduct(ProductId);
+            await ProductService.updateProduct(productId, {
+                isDelete: true
+            });
+
 
             res.status(200).json({
                 success: true,
@@ -109,8 +121,8 @@ export class ProductController {
             const count = Number(lowStockQuantity)
 
             console.log(count);
-            
-            const products = await ProductService.getAllProducts(null,count);
+
+            const products = await ProductService.getAllProducts(null, count);
 
             res.status(200).json({
                 success: true,

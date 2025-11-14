@@ -11,20 +11,21 @@ export class ProductService {
     }
 
     static getAllProducts = async (productIds?: string[], lowStockCount?: number) => {
-        let where: any = {};
+        let where: any = {
+            isDelete: false
+        };
 
-        
+
         if (productIds && productIds.length > 0) {
-            where = {
-                productId: In(productIds)
-            }
+            where.productId = In(productIds)
+
         }
 
         if (lowStockCount) {
             where.currentStock = LessThan(lowStockCount)
 
         }
-        
+
 
         return await this.productRepo.find({
             where,
@@ -35,7 +36,12 @@ export class ProductService {
     }
 
     static getProductById = async (productId: string) => {
-        return await this.productRepo.findOneBy({ productId });
+        return await this.productRepo.findOne({
+            where: {
+                productId,
+                isDelete: false
+            }
+        });
     }
 
     static updateProduct = async (productId: string, updatedProduct: Partial<Product>) => {
