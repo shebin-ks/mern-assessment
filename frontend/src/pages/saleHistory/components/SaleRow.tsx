@@ -37,7 +37,7 @@ const TableRow = ({ sale }: Props) => {
                 ${sale.discount}
             </td>
             <td className="px-6 py-4">
-                <div onClick={() => {
+                <div className="cursor-pointer" onClick={() => {
                     navigate(`/view-sale`, {
                         state: { sale }
                     });
