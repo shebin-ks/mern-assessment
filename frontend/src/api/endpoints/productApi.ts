@@ -7,15 +7,28 @@ export class ProductApi {
 
     static fetchProducts = async (): Promise<fetchProductsResponse> => {
         try {
-            
+
             const response = await axiosInstance.get(API_ROUTES.PRODUCT.GET_ALL_PRODUCTS);
 
             console.log(response);
-            
+
             return response.data;
         } catch (error: any) {
             console.log(error);
-            
+
+            throw new Error(error.response?.data?.message || 'Failed to fetch products');
+        }
+    };
+    static fetchLowStockProducts = async (): Promise<fetchProductsResponse> => {
+        try {
+
+            const response = await axiosInstance.get(`${API_ROUTES.PRODUCT.GET_LOW_STOCK_PRODUCTS}/10`);
+
+
+            return response.data;
+        } catch (error: any) {
+            console.log(error);
+
             throw new Error(error.response?.data?.message || 'Failed to fetch products');
         }
     };
@@ -30,6 +43,32 @@ export class ProductApi {
 
         } catch (error: any) {
             throw new Error(error.response?.data?.message || 'Failed to add products')
+        }
+    }
+    static updateProduct = async (payload: Partial<Product>): Promise<BaseResponse> => {
+
+        try {
+
+            const response = await axiosInstance.patch(`${API_ROUTES.PRODUCT.UPDATE_PRODUCT}/${payload.productId}`, payload);
+
+            console.log(response);
+            
+            return response.data
+
+        } catch (error: any) {
+            throw new Error(error.response?.data?.message || 'Failed to update product')
+        }
+    }
+    static deleteProduct = async (payload: Partial<Product>): Promise<BaseResponse> => {
+
+        try {
+
+            const response = await axiosInstance.delete(`${API_ROUTES.PRODUCT.DELETE_PRODUCT}/${payload.productId}`);
+
+            return response.data
+
+        } catch (error: any) {
+            throw new Error(error.response?.data?.message || 'Failed to delete product')
         }
     }
 }

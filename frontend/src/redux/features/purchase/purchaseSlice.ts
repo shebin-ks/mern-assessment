@@ -19,7 +19,7 @@ const initialState: purchasesState = {
 }
 
 const purchasesSlice = createSlice({
-    name: 'products',
+    name: 'purchase',
     initialState,
     reducers: {},
     extraReducers: (builder) => {

@@ -1,4 +1,5 @@
-import type { LucideIcon } from "lucide-react";
+import { Loader2, type LucideIcon } from "lucide-react";
+import { useAppSelector } from "../../hooks/reduxHooks";
 
 type Props = {
     bgColor: string;
@@ -10,6 +11,7 @@ type Props = {
 
 const DashboardCard = ({ bgColor, heading, count, icon: Icon }: Props) => {
 
+    const { loading } = useAppSelector(state => state.dashboard)
 
     return (
         <div className={`${bgColor} max-w-[250px] flex justify-between items-center px-4 py-6 rounded-md border border-gray-100 shadow-sm`}>
@@ -20,7 +22,11 @@ const DashboardCard = ({ bgColor, heading, count, icon: Icon }: Props) => {
                     <div className={`p-3 rounded-lg `}>
                         <Icon className={`w-8 h-8 text-white`} />
                     </div>
-                    {count}
+                    {loading ?
+                        <Loader2 className="animate-spin w-10 h-10" />
+                        :
+                        count
+                    }
                 </div>
 
             </div>

@@ -5,9 +5,15 @@ export const API_ROUTES = {
         REGISTER: `/auth/register`,
         LOGIN: `/auth/login`,
     },
+    DASHBOARD: {
+        GET_DASHBOARD_DATA: '/dashboard',
+    },
     PRODUCT: {
         ADD_PRODUCT: `/product`,
+        UPDATE_PRODUCT: `/product`,
+        DELETE_PRODUCT: `/product`,
         GET_ALL_PRODUCTS: '/product',
+        GET_LOW_STOCK_PRODUCTS:'/product/low-stock'
     },
     PURCHASE: {
         ADD_PURCHASE: `/purchase`,

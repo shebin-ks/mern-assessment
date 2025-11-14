@@ -1,12 +1,18 @@
 import { useState } from "react";
 import { ProductApi } from "../../../api/endpoints/productApi";
+import { useLocation } from "react-router-dom";
 
 const CreateProducts = () => {
 
-    const [productName, setProductName] = useState("")
-    const [tax, setTax] = useState(0)
-    const [price, setPrice] = useState(0)
-    const [currentStock, setCurrentStock] = useState(0)
+    const location = useLocation();
+
+    const product = location.state?.product;
+
+
+    const [productName, setProductName] = useState(product?.productName)
+    const [tax, setTax] = useState(product?.taxPercentage)
+    const [price, setPrice] = useState(product?.price)
+    const [currentStock, setCurrentStock] = useState(product?.currentStock)
 
     const handleSubmit = async (e: any) => {
         e.preventDefault()
@@ -18,13 +24,25 @@ const CreateProducts = () => {
         }
 
         try {
-            await ProductApi.createProduct({
-                productName: productName,
-                taxPercentage: tax,
-                price: price,
-                currentStock
-            })
-            alert("product added")
+            if (product) {
+                await ProductApi.updateProduct({
+                    productId: product.productId,
+                    productName: productName,
+                    taxPercentage: tax,
+                    price: price,
+                    currentStock
+                })
+                alert("product updated")
+            } else {
+                await ProductApi.createProduct({
+                    productName: productName,
+                    taxPercentage: tax,
+                    price: price,
+                    currentStock
+                })
+                alert("product updated")
+            }
+
 
             setProductName("")
             setTax(0)
@@ -77,7 +95,9 @@ const CreateProducts = () => {
                     </div>
 
 
-                    <button onClick={handleSubmit} className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Submit</button>
+                    <button onClick={handleSubmit} className="text-white cursor-pointer bg-blue-700 hover:bg-blue-800 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center">
+                        {product ? "Update Product" : "Add Product"}
+                    </button>
                 </form>
 
             </div>
