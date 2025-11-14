@@ -1,27 +1,27 @@
 import { useEffect } from "react"
 import { useAppDispatch, useAppSelector } from "../../hooks/reduxHooks"
-import { fetchProducts } from "../../redux/features/products/productThunks"
 import { Loader2, Plus } from "lucide-react"
-import ProductTable from "./components/ProductTable"
 import { useNavigate } from "react-router-dom"
+import { fetchSales } from "../../redux/features/sales/saleThunks"
+import SaleTable from "./components/SaleTable"
 
 type Props = {}
 
-const Product = ({ }: Props) => {
+const SaleHistory = ({ }: Props) => {
 
-    const { products, loading, success } = useAppSelector(state => state.products)
+    const { sales, loading, success } = useAppSelector(state => state.sales)
 
     const navigate = useNavigate()
     const dispatch = useAppDispatch()
     useEffect(() => {
         if (!loading && success == null) {
-            dispatch(fetchProducts())
+            dispatch(fetchSales())
         }
 
     }, [loading, success])
 
     return (
-        <div className="flex  mx-auto flex-col px-6 py-12">
+        <div className="flex mx-auto flex-col px-6 py-12">
             {
                 (loading) &&
                 (
@@ -32,14 +32,14 @@ const Product = ({ }: Props) => {
 
             }
             <div className="flex justify-between mb-8 px-12">
-                <h1 className="text-xl font-bold">Products</h1>
-                <Plus className="cursor-pointer" onClick={()=>navigate("/add-product")}/>
+                <h1 className="text-xl font-bold">Sales</h1>
+                <Plus className="cursor-pointer" onClick={()=>navigate("/add-sale")}/>
 
             </div>
-            <div className="flex ">
-                {products ?
+            <div className="fle">
+                {sales ?
                     (
-                        <ProductTable products={products} />
+                        <SaleTable sales={sales} />
                     ) :
                     <h1 className="text-red-500 text-3xl">No Products</h1>}
             </div>
@@ -47,4 +47,4 @@ const Product = ({ }: Props) => {
     )
 }
 
-export default Product
+export default SaleHistory

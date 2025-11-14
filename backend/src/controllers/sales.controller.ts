@@ -93,4 +93,20 @@ export class SalesController {
             next(error);
         }
     }
+
+    static getAllSales = async (_req: Request, res: Response, next: NextFunction) => {
+        try {
+            const sales = await SaleService.getAllSales();
+
+            res.status(200).json({
+                success: true,
+                message: "sales fetched successfully",
+                sales
+            });
+        } catch (error) {
+            console.log(error);
+            
+            next(error);
+        }
+    }
 }

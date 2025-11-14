@@ -21,6 +21,7 @@ export const API_ROUTES = {
     },
     SALE: {
         CREATE_SALE: `/sale`,
+        GET_SALE:'/sale'
     },
 
 }

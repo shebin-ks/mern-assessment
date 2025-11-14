@@ -14,7 +14,7 @@ const DashboardCard = ({ bgColor, heading, count, icon: Icon }: Props) => {
     const { loading } = useAppSelector(state => state.dashboard)
 
     return (
-        <div className={`${bgColor} max-w-[250px] flex justify-between items-center px-4 py-6 rounded-md border border-gray-100 shadow-sm`}>
+        <div className={`${bgColor} w-[220px]  flex justify-between items-center px-4 py-6 rounded-md border border-gray-100 shadow-sm`}>
             <div className="flex-1">
                 <h2 className="text-lg font-medium text-white">{heading}</h2>
 

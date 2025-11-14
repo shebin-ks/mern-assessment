@@ -139,7 +139,7 @@ console.log(result);
     }
 
     return (
-        <div className="flex px-6 py-8 place-content-between">
+        <div className="flex mx-auto px-6 py-8 place-content-between">
             <div className="billing mt-12 flex flex-col items-center ">
                 <SaleTable
                     items={items}

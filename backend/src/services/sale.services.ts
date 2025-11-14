@@ -21,10 +21,18 @@ export class SaleService {
         return await this.saleRepo.findOneBy({ saleId });
     }
 
-    static getSalesByDate = async (startingdate: Date, endingDate:Date) => {
+    static getSalesByDate = async (startingdate: Date, endingDate: Date) => {
         return await this.saleRepo.findAndCount({
             where: {
                 createdAt: Between(startingdate, endingDate)
+            }
+        })
+    }
+    static getAllSales = async () => {
+        return await this.saleRepo.find({
+            relations: ["saleItems.product"],
+            order: {
+                createdAt: 'DESC'
             }
         })
     }

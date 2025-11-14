@@ -11,7 +11,7 @@ export class SaleItem {
 
 
 
-    @ManyToOne(() => Sale, { onDelete: "CASCADE", nullable: false })
+    @ManyToOne(() => Sale, (sale) => sale.saleItems, { onDelete: "CASCADE", nullable: false })
     @JoinColumn({ name: 'sale_id' })
     sale: Sale
 
@@ -23,7 +23,7 @@ export class SaleItem {
     @Column({ default: 1 })
     quantity: number
 
-    @Column({ type: 'decimal', name: 'sale_item_price',})
+    @Column({ type: 'decimal', name: 'sale_item_price', })
     saleItemPrice: number
 
     @CreateDateColumn({ name: 'created_at' })

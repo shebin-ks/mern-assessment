@@ -1,4 +1,4 @@
-import { Column, CreateDateColumn, Entity, JoinColumn, ManyToMany, PrimaryGeneratedColumn } from "typeorm";
+import { Column, CreateDateColumn, Entity, JoinColumn, ManyToMany, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 import { SaleItem } from "./saleItem.entity";
 
 
@@ -13,9 +13,8 @@ export class Sale {
     customerNumber: number
 
 
-    @ManyToMany(() => SaleItem, { onDelete: "CASCADE", nullable: false })
-    @JoinColumn({ name: 'sale_item_id' })
-    saleItem: SaleItem
+    @OneToMany(() => SaleItem,(saleItem)=>saleItem.sale)
+    saleItems: SaleItem[]
 
 
     @Column({ type: 'decimal', name: 'sale_price', default: 0 })

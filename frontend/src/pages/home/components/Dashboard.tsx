@@ -22,25 +22,28 @@ const Dashboard = ({ }: Props) => {
   
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-3 px-8 py-12">
-      <DashboardCard
-        bgColor="bg-blue-400"
-        heading="Total sales"
-        count={`${dashboard?.totalSales}`}
-        icon={ShoppingCartIcon}
-      />
-      <DashboardCard
-        bgColor="bg-green-400"
-        heading="Total Sale amount"
-        count={`$ ${dashboard?.totalSaleAmount}`}
-        icon={Currency}
-      />
-      {/* <DashboardCard
-        bgColor="bg-orange-400"
-        heading="Total sales"
-        count="$500"
-        icon={ShoppingCartIcon}
-      /> */}
+    <div>
+      <h1 className="text-2xl font-bold text-purple-800">Dashboard</h1>
+      <div className="flex gap-6 px-8 pb-12 pt-4">
+        <DashboardCard
+          bgColor="bg-blue-400"
+          heading="Total sales"
+          count={`${dashboard?.totalSales}`}
+          icon={ShoppingCartIcon}
+        />
+        <DashboardCard
+          bgColor="bg-green-400"
+          heading="Total Sale amount"
+          count={`$ ${dashboard?.totalSaleAmount}`}
+          icon={Currency}
+        />
+        {/* <DashboardCard
+          bgColor="bg-orange-400"
+          heading="Total sales"
+          count="$500"
+          icon={ShoppingCartIcon}
+        /> */}
+      </div>
     </div>
   )
 }

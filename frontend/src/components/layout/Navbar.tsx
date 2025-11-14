@@ -30,7 +30,7 @@ const Navbar = ({ }: Props) => {
                     onClick={() => setIsOpen(false)}
                     className="flex items-center"
                 >
-                   <h2 className="text-2xl font-bold text-red-500">MShop</h2>
+                    <h2 className="text-2xl font-bold text-red-500">MShop</h2>
                 </NavLink>
 
                 <div className="hidden md:flex gap-8 items-center">
@@ -43,6 +43,7 @@ const Navbar = ({ }: Props) => {
                     <NavLink to="/sales" className={linkClasses}>
                         Sales
                     </NavLink>
+
                     <NavLink to="/purchase" className={linkClasses}>
                         Purchase
                     </NavLink>

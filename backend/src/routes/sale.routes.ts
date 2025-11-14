@@ -9,6 +9,7 @@ import { SalesController } from '../controllers/sales.controller';
 const saleRouter = express.Router();
 
 saleRouter.route('/')
+    .get(SalesController.getAllSales)
     .post(validateBody(saleCreateSchema), SalesController.createSales)
 
 

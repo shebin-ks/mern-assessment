@@ -6,6 +6,8 @@ import Home from "../pages/home/Home";
 import CreateProducts from "../pages/products/components/CreateProducts";
 import Purchase from "../pages/purchase/Purchase";
 import CreatePurchase from "../pages/purchase/components/CreatePurchase";
+import SaleHistory from "../pages/saleHistory/SaleHistory";
+import SaleItems from "../pages/saleHistory/saleItem/SaleItems";
 
 type Props = {}
 
@@ -30,17 +32,29 @@ const AppRoutes = (_: Props) => {
                     path="/add-product"
                     element={<CreateProducts />}
                 />
-                <Route
+                {/* <Route
                     path="/sales"
                     element={<Sale />}
-                />
+                /> */}
                 <Route
                     path="/purchase"
                     element={<Purchase />}
                 />
                 <Route
+                    path="/sales"
+                    element={<SaleHistory />}
+                />
+                <Route
+                    path="/add-sale"
+                    element={<Sale />}
+                />
+                <Route
                     path="/add-purchase"
                     element={<CreatePurchase />}
+                />
+                 <Route
+                    path="/view-sale"
+                    element={<SaleItems />}
                 />
 
 

@@ -1,39 +1,37 @@
-import type { Product } from "../../../redux/features/products/productTypes"
-import TableRow from "./TableRow"
+import type { Sale } from "../../../redux/features/sales/saleTypes"
+import TableRow from "./SaleRow"
 
 type Props = {
-    products: Product[]
+    sales: Sale[]
 }
 
-const ProductTable = ({ products }: Props) => {
+const SaleTable = ({ sales }: Props) => {
 
     return (
         <table className="text-sm text-left rtl:text-right text-gray-500">
             <thead className="text-md  uppercase text-gray-800 bg-gray-200">
                 <tr>
                     <th scope="col" className="px-6 py-3">
-                        Product name
+                        Date
                     </th>
                     <th scope="col" className="px-6 py-3">
-                        SKU
+                        Customer number
                     </th>
                     <th scope="col" className="px-6 py-3">
-                        Current Stock
+                        Sale Price
                     </th>
                     <th scope="col" className="px-6 py-3">
-                        Price
+                        Discount
                     </th>
                     <th scope="col" className="px-6 py-3">
-                        Tax percentage
+                        Action
                     </th>
-                    <th scope="col" className="px-6 py-3">
-                        Actions
-                    </th>
+
                 </tr>
             </thead>
             <tbody>
-                {products.map((product) => (
-                    <TableRow product={product} />
+                {sales.map((sale) => (
+                    <TableRow sale={sale} />
 
                 ))}
             </tbody>
@@ -42,4 +40,4 @@ const ProductTable = ({ products }: Props) => {
     )
 }
 
-export default ProductTable
+export default SaleTable

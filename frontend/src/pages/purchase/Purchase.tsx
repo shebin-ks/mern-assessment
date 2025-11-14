@@ -22,7 +22,7 @@ const Purchase = ({ }: Props) => {
 
     
     return (
-        <div className="flex flex-col px-6 py-12">
+        <div className="flex mx-auto flex-col px-6 py-12">
             {
                 (loading) &&
                 (
@@ -37,7 +37,7 @@ const Purchase = ({ }: Props) => {
                 <Plus className="cursor-pointer" onClick={()=>navigate("/add-purchase")}/>
 
             </div>
-            <div className="flex items-center justify-center w-screen">
+            <div className="flex items-center justify-center">
                 {purchases ?
                     (
                         <PurchaseTable purchases={purchases} />

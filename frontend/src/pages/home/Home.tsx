@@ -6,7 +6,7 @@ type Props = {}
 
 const Home: React.FC = ({ }: Props) => {
     return (
-        <div className="flex flex-col">
+        <div className="flex mx-auto flex-col px-6 py-12">
 
             <Dashboard />
             <LowStockProducts />

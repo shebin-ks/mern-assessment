@@ -25,12 +25,12 @@ const LowStockProducts = ({ }: Props) => {
 
     return (
         <div className="flex flex-col px-6 py-12">
-            <div className="flex justify-between mb-8 px-12">
+            <div className="flex justify-between items-center mb-8">
                 <h1 className="text-xl font-bold">Low Stock Products(10)</h1>
                 <Plus className="cursor-pointer" onClick={() => navigate("/add-purchase")} />
 
             </div>
-            <div className="flex items-center justify-center w-screen">
+            <div className="flex items-center justify-center">
                 {lowStocks ?
                     lowStocks.length > 0 ?
                         (
